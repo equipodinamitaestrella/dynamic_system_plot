@@ -1,1 +1,1 @@
-Python3 testing.sh
+Python3 main.py
