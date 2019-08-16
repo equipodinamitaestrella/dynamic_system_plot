@@ -17,16 +17,6 @@ def generateVector(x0, x1, x2):
     return vect1, vect2 , vect3
 
 def plot(vect1, vect2, vect3):
-    """ax = plt.axes()
-    plt.grid()
-    
-    plt.title("Plotting x = x^2 + 1")
-
-    plt.plot(range(11), vect1)
-    plt.plot(range(11), vect2)
-    plt.plot(range(11), vect3)"""
-
-    print(vect1, vect2, vect3)
     fig, ax = plt.subplots()
     ax.plot(vect1, label = 'x = 0.1')
     ax.plot(vect2, label = 'x = 1')
