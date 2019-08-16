@@ -1,5 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
+
+def f(x):
+    return x*x + 1
+
 def generateVector(x0, x1, x2):
     vect1 = [x0]
     vect2 = [x1]
@@ -8,11 +12,11 @@ def generateVector(x0, x1, x2):
     aux2 = float(x1)
     aux3 = float(x2)
     for i in range(7):
-        aux1 = aux1**2 + 1
+        aux1 = f(aux1)
         vect1.append(aux1)
-        aux2 = aux2**2 + 1
+        aux2 = f(aux2)
         vect2.append(aux2)
-        aux3 = aux3**2 + 1
+        aux3 = f(aux3)
         vect3.append(aux3)
     return vect1, vect2 , vect3
 
