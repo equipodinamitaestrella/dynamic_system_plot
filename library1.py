@@ -62,5 +62,5 @@ def plott(vect1, vect2, vect3, title):
     ax.set_yscale('log')
     ax.set(xlabel = "i", ylabel = '$x_i$', title = title)
     ax.grid()
-    fig.savefig(title)
+    fig.savefig(title.replace('.',','))
     plt.show
