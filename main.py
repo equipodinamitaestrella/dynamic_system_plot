@@ -1,4 +1,5 @@
-from library1 import *
+from library_dynamic import *
+from library_plot import *
 
 from matplotlib import pyplot as pyplt
 
