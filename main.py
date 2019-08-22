@@ -12,20 +12,19 @@ if __name__ == "__main__":
         if '-f' in sys.argv[i]:
             file_flag = True
             filename = sys.argv[i+1]
-    
+
         elif '-e' in sys.argv[i]:
             equation_flag = True
             formula_str = sys.argv[i+1]
         
-        elif '--help' in sys.argv[i]:
+        elif '--help' in sys.argv[i] and file_flag == False and equation_flag == False:
             helpf()
             exit()
-        
-        else:
-            helpf()
-            exit()
+	
+    if file_flag == False and equation_flag == False:
+        helpf()
+        exit()
 
-    
     if file_flag:
         with open(filename) as f:
             formula = f.readlines()
