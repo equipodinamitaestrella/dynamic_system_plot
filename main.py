@@ -39,9 +39,9 @@ if __name__ == "__main__":
             n_flag = True
 
         elif '-x0' in sys.argv[i] and x_flag == False:
-            x0 = sys.argv[i+1]
-            x1 = sys.argv[i+2]
-            x2 = sys.argv[i+3]
+            x0 = float(sys.argv[i+1])
+            x1 = float(sys.argv[i+2])
+            x2 = float(sys.argv[i+3])
             x_flag = True
             print("si entre")
 
