@@ -1,1 +1,1 @@
-x*x+1
+python3 -e ax^n+b -a 0.1 -b 2 -n 2 -x0 1 2 3 -i 4
