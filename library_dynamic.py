@@ -2,7 +2,7 @@ import numpy as np
 from sympy import *
 import sys
 
-def generateVector(x0, x1, x2, formulae): 
+def generateVector(x0, x1, x2, formulae, itera): 
     # formalae must be a lambdified sympy expression
     
     vect1 = [x0]
@@ -11,7 +11,7 @@ def generateVector(x0, x1, x2, formulae):
     aux1 = float(x0)
     aux2 = float(x1)
     aux3 = float(x2)
-    for i in range(7):
+    for i in range(itera):
         aux1 = formulae(aux1)
         vect1.append(aux1)
         aux2 = formulae(aux2)
