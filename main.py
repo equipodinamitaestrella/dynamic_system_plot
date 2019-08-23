@@ -34,6 +34,7 @@ if __name__ == "__main__":
     if equation_flag:
         print("using equation mode with", formula_str)
 
-    vectors = generateVector(0.1,1,10, formula_str)
-    plott(vectors[0], vectors[1], vectors[2], vectors[3])
+    formulae = dynamic_system(formula_str, 1, 1, 1)
+    vectors = generateVector(0.1,1,10, formulae)
+    plott(vectors[0], vectors[1], vectors[2], formula_str)
     pyplt.show()
