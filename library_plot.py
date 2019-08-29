@@ -8,7 +8,7 @@ def plott(cube, title):
             ax.plot(cube[i][j], label = 'x = %s'%(cube[i][j][0]))
 
     ax.set_yscale('symlog')
-    ax.set(xlabel = "i", ylabel = '$x_i$', title = title)
+    #ax.set(xlabel = "i", ylabel = '$x_i$', title = title)
     ax.grid()
     #fig.savefig(title.replace('.',','))
     plt.legend(loc='best')

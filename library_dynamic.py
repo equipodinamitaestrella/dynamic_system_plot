@@ -9,7 +9,7 @@ def generateVector(x, formulae, itera):
     cube=[]
     for eq in formulae:
         eq_matrix=[]
-        for x0 in range(x[0],x[1],x[2]):
+        for x0 in np.arange(x[0],x[1],x[2]):
             vect1 = [float(x0)]
             aux1 = float(x0)
 
@@ -39,9 +39,9 @@ def generate_combinations(eq_str,a,b,n):
     
     equations=[]
     
-    for a0 in range(a[0],a[1],a[2]):
-        for b0 in range(b[0],b[1],b[2]):
-            for n0 in range(n[0],n[1],n[2]):
+    for a0 in np.arange(a[0],a[1],a[2]):
+        for b0 in np.arange(b[0],b[1],b[2]):
+            for n0 in np.arange(n[0],n[1],n[2]):
                 equations.append(dynamic_system(eq_str,a0,b0,n0))
 
     return equations
