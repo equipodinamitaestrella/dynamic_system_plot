@@ -112,5 +112,7 @@ if __name__ == "__main__":
 
     formulae = dynamic_system(formula_str, a, b, n)
     vectors = generateVector(x0,x1,x2, formulae, itera)
-    plott(vectors[0], vectors[1], vectors[2], formula_str)
+    title=formula_str+'_a'+str(a)+'_b'+str(b)+'_n'+str(n)+'_x0'+str(x0)+'_'+str(x1)+'_'+str(x2) 
+    
+    plott(vectors[0], vectors[1], vectors[2], title)
     pyplt.show()
