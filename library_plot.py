@@ -1,13 +1,15 @@
 import matplotlib.pyplot as plt
 
-def plott(vect1, vect2, vect3, title):
+def plott(cube, title):
     fig, ax = plt.subplots()
-    ax.plot(vect1, label = 'x = %s'%(vect1[0]))
-    ax.plot(vect2, label = 'x = %s'%(vect2[0]))
-    ax.plot(vect3, label = 'x = %s'%(vect3[0]))
+    
+    for i in range(len(cube)): # iterate over matrices each representing orbits with a single equations
+        for j in range(len(cube[0])): # iterate over each orbit within the given matrix
+            ax.plot(cube[i][j], label = 'x = %s'%(cube[i][j][0]))
+
     ax.set_yscale('symlog')
     ax.set(xlabel = "i", ylabel = '$x_i$', title = title)
     ax.grid()
-    fig.savefig(title.replace('.',','))
+    #fig.savefig(title.replace('.',','))
     plt.legend(loc='best')
     plt.show
