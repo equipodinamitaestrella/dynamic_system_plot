@@ -44,12 +44,12 @@ def file_parser(file_string):
             x_flag = True
         elif split_string[i] == '-i' and i_flag == False:
             itera = int(split_string[i+1])
-            if itera > 7:
+            '''if itera > 7:
                 itera = 7
                 print("Notice: iteration value too big, maximum accepted value is 7 and has been set to 7")
             elif itera < 1:
                 itera = 1
-                print("Notice: iteration value too small, minimum accepted value is 1 and has been set to 1")
+                print("Notice: iteration value too small, minimum accepted value is 1 and has been set to 1")'''
             i_flag = True
     
     return formula_str, a, a_flag, b, b_flag, n, n_flag, x, x_flag, itera, i_flag 
@@ -110,12 +110,12 @@ if __name__ == "__main__":
 
         elif '-i' in sys.argv[i] and i_flag == False:
             itera = int(sys.argv[i+1])
-            if itera > 7:
+            '''if itera > 7:
                 itera = 7
                 print("Notice: iteration value too big, maximum accepted value is 7 and has been set to 7")
             elif itera < 1:
                 itera = 1
-                print("Notice: iteration value too small, minimum accepted value is 1 and has been set to 1")
+                print("Notice: iteration value too small, minimum accepted value is 1 and has been set to 1")'''
             i_flag = True
 	
     if file_flag == True:
@@ -176,7 +176,8 @@ if __name__ == "__main__":
 
     formulae = generate_combinations(formula_str, a, b, n)
     vectors = generateVector(x, formulae, itera)
+    vector_grams = convert_to_unit(vectors, np.float64(1e-12))
     title=formula_str+'_a_'+', '.join(map(str,a))+'_b_'+', '.join(map(str,b))+'_n_'+', '.join(map(str,n))+'_x0_'+', '.join(map(str,x))
     
-    plott(vectors, title)
+    plott(vector_grams, title)
     pyplt.show()

@@ -8,8 +8,9 @@ def plott(cube, title):
             ax.plot(cube[i][j], label = 'x = %s'%(cube[i][j][0]))
     delta_time=3
     seconds=[i*3 for i in range(len(cube[0][0]))]
+    #mass=9.5*10**-13
     ax.set_yscale('symlog')
-    ax.set(xlabel = "hours", ylabel = '$x_i$', title = title)
+    ax.set(xlabel = "hours", ylabel = 'mass (gr)', title = title)
     plt.xticks(range(len(cube[0][0])),seconds)
     ax.grid()
     fig.savefig(title.replace('.',','))

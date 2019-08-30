@@ -45,3 +45,9 @@ def generate_combinations(eq_str,a,b,n):
                 equations.append(dynamic_system(eq_str,a0,b0,n0))
 
     return equations
+
+def convert_to_unit(cube, base_quantity):
+    cube_array=np.array(cube, dtype=np.float64)
+    cube_array=cube_array*base_quantity
+    
+    return cube_array
