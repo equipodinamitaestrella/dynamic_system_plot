@@ -4,7 +4,7 @@ from help_file import *
 from matplotlib import pyplot as pyplt
 import numpy as np
 
-def parser(file_string):
+def parser(com_string): #com_string es el comando en sys.argv
     equation_flag = False
     a_flag = False
     b_flag = False
@@ -12,7 +12,7 @@ def parser(file_string):
     x_flag = False
     i_flag = False
     
-    split_string = file_string.split()
+    split_string = com_string.split()
 
     for i in range(len(split_string)):
         if split_string[i] == '-e':
