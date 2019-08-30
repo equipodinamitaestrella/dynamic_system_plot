@@ -10,6 +10,6 @@ def plott(cube, title):
     ax.set_yscale('symlog')
     #ax.set(xlabel = "i", ylabel = '$x_i$', title = title)
     ax.grid()
-    #fig.savefig(title.replace('.',','))
-    plt.legend(loc='best')
-    plt.show
+    fig.savefig(title.replace('.',','))
+    #plt.legend(loc='best', prop={'size': 6})
+    plt.show()

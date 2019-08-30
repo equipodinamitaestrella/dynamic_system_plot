@@ -176,7 +176,7 @@ if __name__ == "__main__":
 
     formulae = generate_combinations(formula_str, a, b, n)
     vectors = generateVector(x, formulae, itera)
-    title=formula_str+'_a'+str(a)+'_b'+str(b)+'_n'+str(n)+'_x0'+str(x[0])+'_'+str(x[1])+'_'+str(x[2]) 
+    title=formula_str+'_a_'+', '.join(map(str,a))+'_b_'+', '.join(map(str,b))+'_n_'+', '.join(map(str,n))+'_x0_'+', '.join(map(str,x))
     
     plott(vectors, title)
     pyplt.show()
