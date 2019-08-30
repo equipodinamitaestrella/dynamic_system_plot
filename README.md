@@ -12,17 +12,7 @@ To complete the description of the dynamical system, we need to specify a rule t
 
 ## Summary
 
-This proyect consists of a script written in Python 3, which uses Matplotlib to plot a simple dynamical system:
-
-x = x² + 1
-
-Running the following initial conditions:
-
-x_1 = 0.1
-
-x_2 = 1
-
-x_3 = 10
+This project consists of a script written in Python 3, which uses Matplotlib to plot any equation the user gives as a parameter. User also must provide a range of numbers for the equation's parameters, a range for the initial conditions and the number of iterations the programm will run. This project can also receive a file as an input.
 
 ## Execution
 
