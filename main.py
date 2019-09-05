@@ -11,7 +11,7 @@ def parser(com_string): #com_string es el comando en sys.argv
     n_flag = False
     x_flag = False
     i_flag = False
-    
+    dynamic = False
     split_string = com_string.split()
 
     for i in range(len(split_string)):
@@ -53,11 +53,19 @@ def parser(com_string): #com_string es el comando en sys.argv
             i_flag = True
             if equation_flag == True:
                 print("using equation mode with", formula_str)
+        elif split_string[i] == '-d':
+            dynamic = True
 
 
     if equation_flag == False:
         helpf()
         exit()
+
+    if dynamic == True:
+        print("Evaluating dynamic system")
+    
+    else:
+        print("Evaluating function")
 
     if a_flag == False:
         print("WARNING:")
