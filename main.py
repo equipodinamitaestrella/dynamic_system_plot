@@ -66,14 +66,13 @@ def parser(com_string): #com_string es el comando en sys.argv
 
     if dynamic == True:
         print("Evaluating dynamic system")
+    else:
+        print("Evaluating function")
 
     if noise_flag == True:
         print("Inserting noise to equation", noise)
     else:
         noise = 0
-    
-    else:
-        print("Evaluating function")
 
     if a_flag == False:
         print("WARNING:")
