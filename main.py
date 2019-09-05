@@ -57,7 +57,7 @@ def parser(com_string): #com_string es el comando en sys.argv
                 print("using equation mode with", formula_str)
         elif split_string[i] == '-d':
             dynamic = True
-        elif split_string[i] = '-ns'
+        elif split_string[i] == '-ns'
             noise = int(split_string[i+1])
 
     if equation_flag == False:
