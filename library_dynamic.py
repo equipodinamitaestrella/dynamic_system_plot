@@ -24,7 +24,7 @@ def generateVector(xs, formulae, itera=0, noise=0): # By default, it wont evalua
         
     return np.array(cube, dtype=np.float64)
 
-def dynamic_system(eq_str, a, b, n):
+def create_equation(eq_str, a, b, n):
     # eq_str must have a, b and n integers or floting point values to insert into the expression
 
     eq_str=eq_str.replace('a', str(a))
@@ -45,7 +45,7 @@ def generate_combinations(eq_str,a,b,n):
     for a0 in np.arange(a[0],a[1],a[2]):
         for b0 in np.arange(b[0],b[1],b[2]):
             for n0 in np.arange(n[0],n[1],n[2]):
-                equations.append(dynamic_system(eq_str,a0,b0,n0))
+                equations.append(create_equation(eq_str,a0,b0,n0))
 
     return equations
 

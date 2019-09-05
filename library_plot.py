@@ -18,7 +18,7 @@ def plott(xs, cube, title):
         delta_time=3
         seconds=[i*3 for i in range(len(cube[0][0]))]
         plt.xticks(range(len(cube[0][0])),seconds)
-        ax.set_yscale('symlog')
+        ax.set_yscale('log')
         
     #mass=9.5*10**-13
     ax.set(xlabel = "hours", ylabel = 'mass (gr)', title = title)
