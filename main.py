@@ -59,6 +59,7 @@ def parser(com_string): #com_string es el comando en sys.argv
             dynamic = True
         elif split_string[i] == '-ns':
             noise = int(split_string[i+1])
+            noise_flag=True
 
     if equation_flag == False:
         helpf()
