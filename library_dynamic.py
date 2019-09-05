@@ -1,8 +1,9 @@
 import numpy as np
 from sympy import *
 import sys
+from random import *
 
-def generateVector(xs, formulae, itera=0): # By default, it wont evaluate as dynamic_system with itera=0 
+def generateVector(xs, formulae, itera=0, noise=0): # By default, it wont evaluate as dynamic_system with itera=0 
     # formalae must be a lambdified sympy expression
     # x must be a list of lenght 3 with initial value, last value and step respectively
     # this function returns a cube where each matrix contains all the iterations with a given expression and each row within a matrix contains the iterations of a particular initial condition
@@ -14,7 +15,7 @@ def generateVector(xs, formulae, itera=0): # By default, it wont evaluate as dyn
                 vect1 = [float(x0)]
                 aux1 = float(x0)
             else:
-                vect1 = eq(float(x0))
+                vect1 = eq(float(x0))+random()*noise
             for i in range(itera):
                 aux1 = eq(aux1)
                 vect1.append(aux1)
