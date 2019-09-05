@@ -13,7 +13,7 @@ def parser(com_string): #com_string es el comando en sys.argv
     x_flag = False
     i_flag = False
     dynamic = False
-    random_flag = False
+    noise_flag = False
     split_string = com_string.split()
 
     for i in range(len(split_string)):
@@ -57,9 +57,8 @@ def parser(com_string): #com_string es el comando en sys.argv
                 print("using equation mode with", formula_str)
         elif split_string[i] == '-d':
             dynamic = True
-        elif split_string[i] == 'r':
-            random_flag == True
-
+        elif split_string[i] = '-n'
+            noise = int(split_string[i+1])
 
     if equation_flag == False:
         helpf()
@@ -67,6 +66,11 @@ def parser(com_string): #com_string es el comando en sys.argv
 
     if dynamic == True:
         print("Evaluating dynamic system")
+
+    if noise_flag == True:
+        print("Inserting noise to equation", noise)
+    else:
+        noise = 0
     
     else:
         print("Evaluating function")
@@ -112,7 +116,7 @@ def parser(com_string): #com_string es el comando en sys.argv
         print("if you need help with the use of this software please type:")
         print("python main.py --help")
         itera = 7
-    return formula_str, a, b, n, x, itera, dynamic
+    return formula_str, a, b, n, x, itera, dynamic, noise
     
 
 if __name__ == "__main__":
@@ -131,19 +135,19 @@ if __name__ == "__main__":
     if file_flag == True:
         with open(filename) as f:
             formula = f.readlines()
-            formula_str, a, b, n, x, itera, dynamic = parser(formula[0])
+            formula_str, a, b, n, x, itera, dynamic, noise = parser(formula[0])
             print("using file mode with", formula_str)
             
     if file_flag == False:
         formula = " ".join(sys.argv[1:])
-        formula_str, a, b, n, x, itera, dynamic = parser(formula)
+        formula_str, a, b, n, x, itera, dynamic, noise = parser(formula)
 
     formulae = generate_combinations(formula_str, a, b, n)
     xs = np.arange(x[0], x[1], x[2])
     if dynamic == True:
-        vectors = generateVector(xs, formulae, itera)
+        vectors = generateVector(xs, formulae, itera, noise)
     else:
-        vectors = generateVector(xs, formulae, 0)
+        vectors = generateVector(xs, formulae, 0, noise)
     vector_grams = convert_to_unit(vectors, np.float64(1e-12))
     title=formula_str+'_a_'+', '.join(map(str,a))+'_b_'+', '.join(map(str,b))+'_n_'+', '.join(map(str,n))+'_x0_'+', '.join(map(str,x))
     
