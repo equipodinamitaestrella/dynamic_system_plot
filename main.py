@@ -139,13 +139,13 @@ if __name__ == "__main__":
         formula_str, a, b, n, x, itera, dynamic = parser(formula)
 
     formulae = generate_combinations(formula_str, a, b, n)
-    xs = np.arrange(x[0], x[1], x[2])
+    xs = np.arange(x[0], x[1], x[2])
     if dynamic == True:
-        vectors = generateVector(x, formulae, itera, xs)
+        vectors = generateVector(xs, formulae, itera)
     else:
-        vectors = generateVector(x, formulae, 0, xs)
+        vectors = generateVector(xs, formulae, 0)
     vector_grams = convert_to_unit(vectors, np.float64(1e-12))
     title=formula_str+'_a_'+', '.join(map(str,a))+'_b_'+', '.join(map(str,b))+'_n_'+', '.join(map(str,n))+'_x0_'+', '.join(map(str,x))
     
-    plott(vector_grams, title)
+    plott(xs, vector_grams, title)
     pyplt.show()
