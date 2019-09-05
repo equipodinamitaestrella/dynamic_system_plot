@@ -2,24 +2,26 @@ import numpy as np
 from sympy import *
 import sys
 
-def generateVector(x, formulae, itera): 
+def generateVector(xs, formulae, itera=0): # By default, it wont evaluate as dynamic_system with itera=0 
     # formalae must be a lambdified sympy expression
     # x must be a list of lenght 3 with initial value, last value and step respectively
     # this function returns a cube where each matrix contains all the iterations with a given expression and each row within a matrix contains the iterations of a particular initial condition
     cube=[]
     for eq in formulae:
         eq_matrix=[]
-        for x0 in np.arange(x[0],x[1],x[2]):
-            vect1 = [float(x0)]
-            aux1 = float(x0)
-
+        for x0 in xs:
+            if itera>0:
+                vect1 = [float(x0)]
+                aux1 = float(x0)
+            else:
+                vect1 = eq(float(x0))
             for i in range(itera):
                 aux1 = eq(aux1)
                 vect1.append(aux1)
             eq_matrix.append(vect1)
         cube.append(eq_matrix)
         
-    return cube
+    return np.array(cube, dtype=np.float64)
 
 def dynamic_system(eq_str, a, b, n):
     # eq_str must have a, b and n integers or floting point values to insert into the expression
@@ -47,7 +49,6 @@ def generate_combinations(eq_str,a,b,n):
     return equations
 
 def convert_to_unit(cube, base_quantity):
-    cube_array=np.array(cube, dtype=np.float64)
-    cube_array=cube_array*base_quantity
+    cube=cube*base_quantity
     
-    return cube_array
+    return cube
