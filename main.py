@@ -127,16 +127,36 @@ def parser(com_string): #com_string es el comando en sys.argv
         print("python main.py --help")
         itera = 7
     return formula_str, a, b, n, x, itera, dynamic, noise, histogr
-    
+
+def obs_parser(obs_name):
+    obs_z = []
+    obs_d = []
+    obs_err = []
+    with open(obs_name) as f:
+        data = f.readlines()
+        for line in data:
+            if line[0] != '#':
+                z, d, d_err = line.split()
+                obs_z.append(float(z))
+                obs_d.append(float(d))
+                obs_err.append(float(d_err))
+    return obs_z, obs_d, obs_err
 
 if __name__ == "__main__":
     file_flag = False
+    obs_flag = False
 
     n = len(sys.argv)
     for i in range(n):
         if '-f' in sys.argv[i]:
             file_flag = True
             filename = sys.argv[i+1]
+            break
+
+        if '-obs' in sys.argv[i]:
+            obs_flag = True
+            obs_name = sys.argv[i+1]
+            break
             
         elif '--help' in sys.argv[i] and file_flag == False:
             helpf()
@@ -147,6 +167,11 @@ if __name__ == "__main__":
             formula = f.readlines()
             formula_str, a, b, n, x, itera, dynamic, noise, histogr = parser(formula[0])
             print("using file mode with", formula_str)
+
+    if obs_flag == True:
+        obs_z, obs_d, obs_err = obs_parser(obs_name)
+        for i in range(len(obs_z)):
+            print(obs_z[i], obs_d[i], obs_err[i])
             
     if file_flag == False:
         formula = " ".join(sys.argv[1:])
@@ -169,7 +194,7 @@ if __name__ == "__main__":
 
     title=formula_str+'_a_'+', '.join(map(str,a))+'_b_'+', '.join(map(str,b))+'_n_'+', '.join(map(str,n))+'_x0_'+', '.join(map(str,x))
     
-    plott(xs, vectors, title)
+    plott(xs, vectors_ns, title)
 
     if histogr[0] == True:
         plot_histo(errors, histogr[1])
