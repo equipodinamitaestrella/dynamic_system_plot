@@ -2,8 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def plott(xs, cube, title):
+	# cube must be a numpy arra
     dynamic=False
-   # cube must be a numpy array
     fig, ax = plt.subplots()
     if len(cube.shape)==3:
         dynamic=True
@@ -25,4 +25,10 @@ def plott(xs, cube, title):
     ax.grid()
     fig.savefig(title.replace('.',','))
     #plt.legend(loc='best', prop={'size': 6})
+    plt.show()
+
+def pĺot_histo(errors, bins):
+    fig, ax = plt.subplots(errors.shape[0],1)
+    for i in range(errors.shape[0]):
+        ax[i].hist(errors[i], bins=bins)
     plt.show()

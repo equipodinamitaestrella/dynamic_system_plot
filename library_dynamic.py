@@ -15,7 +15,7 @@ def generateVector(xs, formulae, itera=0, noise=0): # By default, it wont evalua
                 vect1 = [float(x0)]
                 aux1 = float(x0)
             else:
-                vect1 = eq(float(x0))+random()*noise
+                vect1 = eq(float(x0))+(random()-0.5)*noise*2
             for i in range(itera):
                 aux1 = eq(aux1)
                 vect1.append(aux1)
@@ -53,3 +53,10 @@ def convert_to_unit(cube, base_quantity):
     cube=cube*base_quantity
     
     return cube
+
+def error_table(fs,gs):
+    errors=np.zeros_like(fs)
+    for i in range(errors.shape[0]):
+        for j in range(errors.shape[1]):
+            errors[i][j]=fs[i][j]-gs[i][j]
+    return errors
