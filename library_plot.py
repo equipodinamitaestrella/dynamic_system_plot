@@ -29,6 +29,9 @@ def plott(xs, cube, title):
 
 def plot_histo(errors, bins):
     fig, ax = plt.subplots(errors.shape[0],1)
-    for i in range(errors.shape[0]):
-        ax[i].hist(errors[i], bins=bins)
+    if errors.shape[0]==1:
+        ax.hist(errors[0], bins=bins)
+    else:
+        for i in range(errors.shape[0]):
+            ax[i].hist(errors[i], bins=bins)
     plt.show()
