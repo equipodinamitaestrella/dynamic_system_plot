@@ -70,7 +70,7 @@ def parser(com_string): #com_string es el comando en sys.argv
         helpf()
         exit()
 
-    if histo_flag = True:
+    if histo_flag == True:
         histogr = (histo_flag, histo)
     else:
         histogr = (histo_flag, 0)
