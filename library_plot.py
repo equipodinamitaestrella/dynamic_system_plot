@@ -27,7 +27,7 @@ def plott(xs, cube, title):
     #plt.legend(loc='best', prop={'size': 6})
     plt.show()
 
-def pĺot_histo(errors, bins):
+def plot_histo(errors, bins):
     fig, ax = plt.subplots(errors.shape[0],1)
     for i in range(errors.shape[0]):
         ax[i].hist(errors[i], bins=bins)

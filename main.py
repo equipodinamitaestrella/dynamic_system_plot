@@ -64,7 +64,7 @@ def parser(com_string): #com_string es el comando en sys.argv
         elif split_string[i] == '-hs':
             histo_flag = True
             print("Histogram activated")
-            histo = split_string[i+1]
+            histo = int(split_string[i+1])
 
     if equation_flag == False:
         helpf()
@@ -165,11 +165,11 @@ if __name__ == "__main__":
     #vector_grams = convert_to_unit(vectors, np.float64(1e-12))
     #vector_grams = convert_to_unit(vectors_ns, np.float64(1e-12))
     if histogr[0] == True:
-        errors = errors_table(vectors, vectors_ns)
+        errors = error_table(vectors, vectors_ns)
 
     title=formula_str+'_a_'+', '.join(map(str,a))+'_b_'+', '.join(map(str,b))+'_n_'+', '.join(map(str,n))+'_x0_'+', '.join(map(str,x))
     
-    plott(xs, vector_grams, title)
+    plott(xs, vectors, title)
 
     if histogr[0] == True:
         plot_histo(errors, histogr[1])
