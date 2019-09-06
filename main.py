@@ -14,6 +14,7 @@ def parser(com_string): #com_string es el comando en sys.argv
     i_flag = False
     dynamic = False
     noise_flag = False
+    histo_flag = False
     split_string = com_string.split()
 
     for i in range(len(split_string)):
@@ -60,10 +61,19 @@ def parser(com_string): #com_string es el comando en sys.argv
         elif split_string[i] == '-ns':
             noise = int(split_string[i+1])
             noise_flag=True
+        elif split_string[i] == '-hs':
+            histo_flag = True
+            print("Histogram activated")
+            histo = split_string[i+1]
 
     if equation_flag == False:
         helpf()
         exit()
+
+    if histo_flag = True:
+        histogr = (histo_flag, histo)
+    else:
+        histogr = (histo_flag, 0)
 
     if dynamic == True:
         print("Evaluating dynamic system")
@@ -116,7 +126,7 @@ def parser(com_string): #com_string es el comando en sys.argv
         print("if you need help with the use of this software please type:")
         print("python main.py --help")
         itera = 7
-    return formula_str, a, b, n, x, itera, dynamic, noise
+    return formula_str, a, b, n, x, itera, dynamic, noise, histogr
     
 
 if __name__ == "__main__":
@@ -135,21 +145,32 @@ if __name__ == "__main__":
     if file_flag == True:
         with open(filename) as f:
             formula = f.readlines()
-            formula_str, a, b, n, x, itera, dynamic, noise = parser(formula[0])
+            formula_str, a, b, n, x, itera, dynamic, noise, histogr = parser(formula[0])
             print("using file mode with", formula_str)
             
     if file_flag == False:
         formula = " ".join(sys.argv[1:])
-        formula_str, a, b, n, x, itera, dynamic, noise = parser(formula)
+        formula_str, a, b, n, x, itera, dynamic, noise, histogr = parser(formula)
 
     formulae = generate_combinations(formula_str, a, b, n)
     xs = np.arange(x[0], x[1], x[2])
     if dynamic == True:
-        vectors = generateVector(xs, formulae, itera, noise)
+        vectors_ns = generateVector(xs, formulae, itera, noise)
+        if histogr[0] == True:
+            vectors = generateVector(xs, formulae, itera, 0)
     else:
-        vectors = generateVector(xs, formulae, 0, noise)
-    vector_grams = convert_to_unit(vectors, np.float64(1e-12))
+        vectors_ns = generateVector(xs, formulae, 0, noise)
+        if histogr[0] == True:
+            vectors = generateVector(xs, formulae, 0, 0)
+    #vector_grams = convert_to_unit(vectors, np.float64(1e-12))
+    #vector_grams = convert_to_unit(vectors_ns, np.float64(1e-12))
+    if histogr[0] == True:
+        errors = errors_table(vectors, vectors_ns)
+
     title=formula_str+'_a_'+', '.join(map(str,a))+'_b_'+', '.join(map(str,b))+'_n_'+', '.join(map(str,n))+'_x0_'+', '.join(map(str,x))
     
     plott(xs, vector_grams, title)
+
+    if histogr[0] == True:
+        plot_histo(errors, histogr[1])
     pyplt.show()
