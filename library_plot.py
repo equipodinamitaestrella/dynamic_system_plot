@@ -1,10 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-def plott(xs, cube, title):
+def plott(fig, ax, xs, cube, title):
 	# cube must be a numpy arra
     dynamic=False
-    fig, ax = plt.subplots()
     if len(cube.shape)==3:
         dynamic=True
     
@@ -27,11 +26,13 @@ def plott(xs, cube, title):
     #plt.legend(loc='best', prop={'size': 6})
     plt.show()
 
-def plot_histo(errors, bins):
+def plot_histo(fig, ax, errors, bins):
     fig, ax = plt.subplots(errors.shape[0],1)
     if errors.shape[0]==1:
         ax.hist(errors[0], bins=bins)
     else:
         for i in range(errors.shape[0]):
             ax[i].hist(errors[i], bins=bins)
-    plt.show()
+    
+def plot_observations(fig, ax, obs_z, obs_d, d_err):
+    ax.errorbar(obs_z,obs_d, yerr=d_err, fmt='o')

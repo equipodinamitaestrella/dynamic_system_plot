@@ -189,13 +189,17 @@ if __name__ == "__main__":
             vectors = generateVector(xs, formulae, 0, 0)
     #vector_grams = convert_to_unit(vectors, np.float64(1e-12))
     #vector_grams = convert_to_unit(vectors_ns, np.float64(1e-12))
+    fig, ax = plt.subplots()
     if histogr[0] == True:
-        errors = error_table(vectors, vectors_ns)
+        errors = error_table(fig, ax, vectors, vectors_ns)
 
     title=formula_str+'_a_'+', '.join(map(str,a))+'_b_'+', '.join(map(str,b))+'_n_'+', '.join(map(str,n))+'_x0_'+', '.join(map(str,x))
     
-    plott(xs, vectors_ns, title)
+    plott(fig, ax, xs, vectors_ns, title)
 
     if histogr[0] == True:
-        plot_histo(errors, histogr[1])
+        plot_histo(fig, ax, errors, histogr[1])
+        
+    if obs_flag == True:
+        plot_observations(fig, ax, obs_z, obs_d, obs_err)
     pyplt.show()
