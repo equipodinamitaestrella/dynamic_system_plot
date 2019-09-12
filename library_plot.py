@@ -24,7 +24,7 @@ def plott(fig, ax, xs, cube, title):
     ax.grid()
     fig.savefig(title.replace('.',','))
     #plt.legend(loc='best', prop={'size': 6})
-    plt.show()
+    #plt.show()
 
 def plot_histo(fig, ax, errors, bins):
     fig, ax = plt.subplots(errors.shape[0],1)
