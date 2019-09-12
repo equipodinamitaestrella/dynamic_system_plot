@@ -55,8 +55,11 @@ def convert_to_unit(cube, base_quantity):
     return cube
 
 def error_table(fs,gs):
+    gs=np.array(gs)
+    if len(gs.shape) == 1:
+        gs=gs.reshape(1,len(gs))
     errors=np.zeros_like(fs)
     for i in range(errors.shape[0]):
         for j in range(errors.shape[1]):
-            errors[i][j]=fs[i][j]-gs[i][j]
+            errors[i,j]=fs[i,j]-gs[i,j]
     return errors

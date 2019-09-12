@@ -176,8 +176,8 @@ if __name__ == "__main__":
 
     if obs_flag == True:
         obs_z, obs_d, obs_err, x = obs_parser(obs_name)
-        xs = np.arange(x)
-        obs_d = np.arange(obs_d)
+        xs = obs_z
+        #obs_d = np.arange(obs_d)
     else:
         xs = np.arange(x[0], x[1], x[2])
 
@@ -195,10 +195,13 @@ if __name__ == "__main__":
     #vector_grams = convert_to_unit(vectors_ns, np.float64(1e-12))
     fig, ax = plt.subplots()
     if histogr[0] == True:
-        errors = error_table(vectors, vectors_ns)
+        if noise == 0:
+            errors = error_table(vectors, vectors_ns)
+        else:
+            errors = error_table(vectors, obs_z)
 
-    title=formula_str+'_a_'+', '.join(map(str,a))+'_b_'+', '.join(map(str,b))+'_n_'+', '.join(map(str,n))+'_x0_'+', '.join(map(str,x))
-    
+    #title=formula_str+'_a_'+', '.join(map(str,a))+'_b_'+', '.join(map(str,b))+'_n_'+', '.join(map(str,n))+'_x0_'+', '.join(map(str,x))
+    title="hola"
     plott(fig, ax, xs, vectors_ns, title)
 
     if histogr[0] == True:
