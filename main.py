@@ -4,6 +4,7 @@ from help_file import *
 from matplotlib import pyplot as pyplt
 import numpy as np
 import random
+from scipy.optimize import curve_fit
 
 def parser(com_string): #com_string es el comando en sys.argv
     equation_flag = False
@@ -15,6 +16,8 @@ def parser(com_string): #com_string es el comando en sys.argv
     dynamic = False
     noise_flag = False
     histo_flag = False
+    lvm_flag = False
+
     split_string = com_string.split()
 
     for i in range(len(split_string)):
@@ -65,6 +68,8 @@ def parser(com_string): #com_string es el comando en sys.argv
             histo_flag = True
             print("Histogram activated")
             histo = int(split_string[i+1])
+        elif split_string[i] == '-lvm':
+            lvm_flag = True
 
     if equation_flag == False:
         helpf()
@@ -126,7 +131,7 @@ def parser(com_string): #com_string es el comando en sys.argv
         print("if you need help with the use of this software please type:")
         print("python main.py --help")
         itera = 7
-    return formula_str, a, b, n, x, itera, dynamic, noise, histogr
+    return formula_str, a, b, n, x, itera, dynamic, noise, histogr, lvm_flag
 
 def obs_parser(obs_name):
     obs_z = []
@@ -167,12 +172,12 @@ if __name__ == "__main__":
     if file_flag == True:
         with open(filename) as f:
             formula = f.readlines()
-            formula_str, a, b, n, x, itera, dynamic, noise, histogr = parser(formula[0])
+            formula_str, a, b, n, x, itera, dynamic, noise, histogr, lvm_flag = parser(formula[0])
             print("using file mode with", formula_str)
             
     if file_flag == False:
         formula = " ".join(sys.argv[1:])
-        formula_str, a, b, n, x, itera, dynamic, noise, histogr = parser(formula)
+        formula_str, a, b, n, x, itera, dynamic, noise, histogr, lvm_flag = parser(formula)
 
     if obs_flag == True:
         obs_z, obs_d, obs_err, x = obs_parser(obs_name)
@@ -194,6 +199,11 @@ if __name__ == "__main__":
     #vector_grams = convert_to_unit(vectors, np.float64(1e-12))
     #vector_grams = convert_to_unit(vectors_ns, np.float64(1e-12))
     fig, ax = plt.subplots()
+
+    if lvm_flag == True:
+        h = Levenberg(xs, obs_d, eq_str)
+        plt.plot(xs, h[0](xs,*h[1]))
+
     if histogr[0] == True:
         if noise == 0:
             errors = error_table(vectors, vectors_ns)
