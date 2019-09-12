@@ -132,15 +132,17 @@ def obs_parser(obs_name):
     obs_z = []
     obs_d = []
     obs_err = []
+    x0 = []
     with open(obs_name) as f:
         data = f.readlines()
         for line in data:
             if line[0] != '#':
                 z, d, d_err = line.split()
                 obs_z.append(float(z))
+                x0.append(float(z))
                 obs_d.append(float(d))
                 obs_err.append(float(d_err))
-    return obs_z, obs_d, obs_err
+    return obs_z, obs_d, obs_err, x0
 
 if __name__ == "__main__":
     file_flag = False
@@ -167,18 +169,20 @@ if __name__ == "__main__":
             formula = f.readlines()
             formula_str, a, b, n, x, itera, dynamic, noise, histogr = parser(formula[0])
             print("using file mode with", formula_str)
-
-    if obs_flag == True:
-        obs_z, obs_d, obs_err = obs_parser(obs_name)
-        for i in range(len(obs_z)):
-            print(obs_z[i], obs_d[i], obs_err[i])
             
     if file_flag == False:
         formula = " ".join(sys.argv[1:])
         formula_str, a, b, n, x, itera, dynamic, noise, histogr = parser(formula)
 
+    if obs_flag == True:
+        obs_z, obs_d, obs_err, x = obs_parser(obs_name)
+        xs = np.arange(x)
+        obs_d = np.arange(obs_d)
+    else:
+        xs = np.arange(x[0], x[1], x[2])
+
     formulae = generate_combinations(formula_str, a, b, n)
-    xs = np.arange(x[0], x[1], x[2])
+    
     if dynamic == True:
         vectors_ns = generateVector(xs, formulae, itera, noise)
         if histogr[0] == True:
