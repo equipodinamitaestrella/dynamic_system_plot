@@ -2,6 +2,7 @@ import numpy as np
 from sympy import *
 import sys
 from random import *
+from scipy.optimize import curve_fit
 
 def generateVector(xs, formulae, itera=0, noise=0): # By default, it wont evaluate as dynamic_system with itera=0 
     # formalae must be a lambdified sympy expression
@@ -69,4 +70,4 @@ def Levenberg(xs, obs_d , eq_str):
     y = sympify(eq_str)
     func=lambdify(x,a,b,n,y, "numpy")
     popt, pcov = curve_fit(func, xs, obs_d)
-    return popt, pcov
+    return func, popt, pcov
