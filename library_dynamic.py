@@ -63,3 +63,10 @@ def error_table(fs,gs):
         for j in range(errors.shape[1]):
             errors[i,j]=fs[i,j]-gs[i,j]
     return errors
+
+def Levenberg(xs, obs_d , eq_str):
+    x, a, b, n = symbols("x a b n")
+    y = sympify(eq_str)
+    func=lambdify(x,a,b,n,y, "numpy")
+    popt, pcov = curve_fit(func, xs, obs_d)
+    return popt, pcov
